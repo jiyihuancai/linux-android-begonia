@@ -4,65 +4,65 @@ name: Build kernel packages
 
 # Controls when the workflow will run
 on:
- # Allows you to run this workflow manually from the Actions tab
- workflow_dispatch:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
- # This workflow contains a single job called "build"
- build:
-   name: Build packages
-   runs-on: ubuntu-latest
-   container: quay.io/droidian/build-essential:current-amd64
+  # This workflow contains a single job called "build"
+  build:
+    name: Build packages
+    runs-on: ubuntu-latest
+    container: quay.io/droidian/build-essential:current-amd64
 
-   # Steps represent a sequence of tasks that will be executed as part of the job
-   steps:
-     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-     - uses: actions/checkout@v3
-       with:
-         ref: droidian
-         
-     - name: Update repositories
-       run: |
-         apt update
-         apt install linux-packaging-snippets
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+        with:
+          ref: droidian
+          
+      - name: Update repositories
+        run: |
+          apt update
+          apt install linux-packaging-snippets
 
-     - name: Install package build dependencies
-       run: |
-         package_info=$(head -n 1 debian/changelog)
-         package_name=$(echo "${package_info}" | awk '{ print $1 }')
-         mk-build-deps --remove --install --tool "apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes" debian/control
-         rm -f ${package_name}-build-deps_*.*
-         
-     - name: Build package
-       run: |
-         ARGS="--no-lintian -F -d -sa --no-sign --jobs=$(nproc) -aarm64"
-         eval debuild "${ARGS}"
-         
-     - name: Move packages to out directory
-       run: |
-         cp -rf ./prebuiltimages /
-         mkdir /out
-         cp ../*.deb /out/
-         cp ../*.dsc /out/
-         cp ../*.tar.xz /out/
-         cd /out && export bootimagename=$(ls linux-bootimage-4.14-141*)
-         dpkg-deb -R /out/$bootimagename /bootimage
-         cd /bootimage
-         rm boot/dtbo.img-4.14-141-xiaomi-begonia
-         rm boot/recovery.img-4.14-141-xiaomi-begonia
-         cp -f /prebuiltimages/dtbo.img-4.14-141-xiaomi-begonia boot/
-         cp -f /prebuiltimages/vbmeta.img-4.14-141-xiaomi-begonia boot/
-         find . -type f -not -path "./DEBIAN/*" -exec md5sum {} + | sort -k 2 | sed 's/\.\/\(.*\)/\1/' > DEBIAN/md5sums
-         cd /
-         rm /out/$bootimagename
-         dpkg-deb -b /bootimage /out/$bootimagename
-         ls /out
-         
-     - name: Upload artifacts
-       uses: actions/upload-artifact@v3
-       with:
-         name: linux-image
-         path: /out/*.*
-         if-no-files-found: error
-         retention-days: 1
+      - name: Install package build dependencies
+        run: |
+          package_info=$(head -n 1 debian/changelog)
+          package_name=$(echo "${package_info}" | awk '{ print $1 }')
+          mk-build-deps --remove --install --tool "apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes" debian/control
+          rm -f ${package_name}-build-deps_*.*
+          
+      - name: Build package
+        run: |
+          ARGS="--no-lintian -F -d -sa --no-sign --jobs=$(nproc) -aarm64"
+          eval debuild "${ARGS}"
+          
+      - name: Move packages to out directory
+        run: |
+          cp -rf ./prebuiltimages /
+          mkdir /out
+          cp ../*.deb /out/
+          cp ../*.dsc /out/
+          cp ../*.tar.xz /out/
+          cd /out && export bootimagename=$(ls linux-bootimage-4.14-141*)
+          dpkg-deb -R /out/$bootimagename /bootimage
+          cd /bootimage
+          rm boot/dtbo.img-4.14-141-xiaomi-begonia
+          rm boot/recovery.img-4.14-141-xiaomi-begonia
+          cp -f /prebuiltimages/dtbo.img-4.14-141-xiaomi-begonia boot/
+          cp -f /prebuiltimages/vbmeta.img-4.14-141-xiaomi-begonia boot/
+          find . -type f -not -path "./DEBIAN/*" -exec md5sum {} + | sort -k 2 | sed 's/\.\/\(.*\)/\1/' > DEBIAN/md5sums
+          cd /
+          rm /out/$bootimagename
+          dpkg-deb -b /bootimage /out/$bootimagename
+          ls /out
+          
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-image
+          path: /out/*.*
+          if-no-files-found: error
+          retention-days: 1
