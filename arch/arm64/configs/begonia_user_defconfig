@@ -640,3 +640,155 @@ CONFIG_CRYPTO_ALGAPI=y
 CONFIG_CRC8=y
 CONFIG_CJSON=y
 CONFIG_HWCONF_MANAGER=y
+
+# ============================================================
+# 必须添加：KVM / 虚拟化
+# ============================================================
+CONFIG_VIRTUALIZATION=y
+CONFIG_KVM=y
+CONFIG_KVM_ARM_HOST=y
+CONFIG_KVM_ARM_PMU=y
+CONFIG_KVM_INDIRECT_VECTORS=y
+CONFIG_KVM_MMIO=y
+CONFIG_KVM_VFIO=y
+CONFIG_KVM_GENERIC_DIRTYLOG_READ_PROTECT=y
+CONFIG_KVM_COMPAT=y
+CONFIG_VHOST=y
+CONFIG_VHOST_NET=y
+CONFIG_VHOST_SCSI=y
+CONFIG_VHOST_VSOCK=y
+CONFIG_VIRTIO_PCI=y
+CONFIG_VIRTIO_PCI_LEGACY=y
+CONFIG_VIRTIO_PCI_MODERN=y
+CONFIG_VIRTIO_BALLOON=y
+CONFIG_VIRTIO_BLK=y
+CONFIG_VIRTIO_NET=y
+CONFIG_VIRTIO_CONSOLE=y
+CONFIG_VIRTIO_MMIO=y
+CONFIG_VIRTIO_MMIO_CMDLINE_DEVICES=y
+CONFIG_ARM_ARCH_TIMER_VIRT=y
+CONFIG_PARAVIRT=y
+CONFIG_PARAVIRT_TIME_ACCOUNTING=y
+CONFIG_PARAVIRT_CLOCK=y
+
+# ============================================================
+# 必须添加：IOMMU / SMMU
+# ============================================================
+CONFIG_ARM_SMMU=y
+CONFIG_ARM_SMMU_V3=y
+CONFIG_IOMMU_IO_PGTABLE_LPAE=y
+
+# ============================================================
+# 必须添加：网络设备
+# ============================================================
+CONFIG_MACVTAP=y
+CONFIG_TAP=y
+CONFIG_IPVLAN_L3S=y
+CONFIG_BONDING=y
+CONFIG_TEAM=y
+CONFIG_TEAM_MODE_BROADCAST=y
+CONFIG_TEAM_MODE_ROUNDROBIN=y
+CONFIG_TEAM_MODE_RANDOM=y
+CONFIG_TEAM_MODE_ACTIVEBACKUP=y
+CONFIG_TEAM_MODE_LOADBALANCE=y
+
+# ============================================================
+# 必须添加：Checkpoint/Restore
+# ============================================================
+CONFIG_CHECKPOINT_RESTORE=y
+CONFIG_FHANDLE=y
+CONFIG_UNIX_DIAG=y
+CONFIG_PACKET_DIAG=y
+CONFIG_NETLINK_DIAG=y
+
+# ============================================================
+# 必须添加：HugeTLB
+# ============================================================
+CONFIG_HUGETLBFS=y
+CONFIG_HUGETLB_PAGE=y
+CONFIG_PAGE_COUNTER=y
+CONFIG_CGROUP_HUGETLB=y
+
+# ============================================================
+# 必须添加：nftables 扩展
+# ============================================================
+CONFIG_NF_TABLES_IPV4=y
+CONFIG_NF_TABLES_IPV6=y
+CONFIG_NFT_FIB=y
+CONFIG_NFT_FIB_IPV4=y
+CONFIG_NFT_FIB_IPV6=y
+CONFIG_NFT_FIB_INET=y
+CONFIG_NFT_FIB_NETDEV=y
+CONFIG_NFT_CT=y
+CONFIG_NFT_MASQ=y
+CONFIG_NFT_NAT=y
+
+# ============================================================
+# 必须添加：IPv6 NAT
+# ============================================================
+CONFIG_IP6_NF_NAT=y
+CONFIG_IP6_NF_TARGET_MASQUERADE=y
+CONFIG_NF_NAT_IPV6=y
+
+# ============================================================
+# 必须添加：SCTP
+# ============================================================
+CONFIG_IP_SCTP=y
+
+# ============================================================
+# 必须添加：网络调度 / QoS
+# ============================================================
+CONFIG_NET_SCH_HFSC=y
+CONFIG_NET_SCH_PRIO=y
+CONFIG_NET_SCH_RED=y
+CONFIG_NET_SCH_SFQ=y
+CONFIG_NET_SCH_TBF=y
+CONFIG_NET_CLS_BASIC=y
+CONFIG_NET_CLS_TCINDEX=y
+CONFIG_NET_CLS_ROUTE4=y
+CONFIG_NET_CLS_RSVP=y
+CONFIG_NET_CLS_RSVP6=y
+CONFIG_NET_CLS_FLOW=y
+CONFIG_NET_EMATCH_CMP=y
+CONFIG_NET_EMATCH_NBYTE=y
+CONFIG_NET_EMATCH_META=y
+CONFIG_NET_EMATCH_TEXT=y
+CONFIG_NET_ACT_GACT=y
+CONFIG_NET_ACT_NAT=y
+CONFIG_NET_ACT_PEDIT=y
+CONFIG_NET_ACT_SIMP=y
+CONFIG_NET_ACT_SKBEDIT=y
+CONFIG_NET_ACT_CSUM=y
+
+# ============================================================
+# 必须添加：OverlayFS 扩展
+# ============================================================
+CONFIG_OVERLAY_FS_REDIRECT_DIR=y
+CONFIG_OVERLAY_FS_INDEX=y
+CONFIG_OVERLAY_FS_XINO_AUTO=y
+CONFIG_OVERLAY_FS_METACOPY=y
+
+# ============================================================
+# 必须添加：Cgroup RDMA
+# ============================================================
+CONFIG_CGROUP_RDMA=y
+
+# ============================================================
+# 必须添加：基础系统
+# ============================================================
+CONFIG_DEVTMPFS=y
+CONFIG_SYSVIPC=y
+CONFIG_FW_LOADER_COMPRESS=y
+CONFIG_TMPFS_POSIX_ACL=y
+CONFIG_TMPFS_XATTR=y
+
+# ============================================================
+# 必须添加：UVC / USB Video (One-KVM)
+# ============================================================
+CONFIG_MEDIA_CONTROLLER=y
+CONFIG_MEDIA_USB_SUPPORT=y
+CONFIG_USB_VIDEO_CLASS=y
+CONFIG_USB_VIDEO_CLASS_INPUT_EVDEV=y
+CONFIG_VIDEO_V4L2_SUBDEV_API=y
+CONFIG_VIDEOBUF2_VMALLOC=y
+
